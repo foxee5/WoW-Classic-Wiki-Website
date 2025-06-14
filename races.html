@@ -3,35 +3,194 @@
 <head>
   <meta charset="UTF-8">
   <title>Расы WoW</title>
+  <link rel="icon" href="logos/icon.png" type="image/png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>Расы</h1>
-  <nav>
-    <ul>
-      <li><a href="index.html">Главная</a></li>
-      <li><a href="classes.html">Классы</a></li>
-      <li><a href="races.html">Расы</a></li>
-      <li><a href="expansion.html">Дополнение</a></li>
-    </ul>
-  </nav>
+<header class="text-white py-3 mb-4">
+  <div class="container d-flex justify-content-between align-items-center">
+    <a href="index.html" class="d-flex align-items-center text-decoration-none logo-link">
+      <img src="logos/icon.png" alt="WoW Icon" class="logo">
+      <p class="site-title mb-0">Расы</p>
+    </a>
+    <nav>
+      <ul class="nav">
+        <li class="nav-item"><a class="nav-link text-white" href="index.html">Главная</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="classes.html">Классы</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="races.html">Расы</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="expansion.html">Дополнение</a></li>
+      </ul>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()">Сменить тему</button>
+  </div>
 </header>
-<main>
-  <h2>Альянс:</h2>
-  <ul>
-    <li><strong>Человек</strong></li>
-    <li><strong>Ночной эльф</strong></li>
-    <li><strong>Гном</strong></li>
-    <li><strong>Дворф</strong></li>
-  </ul>
-  <h2>Орда:</h2>
-  <ul>
-    <li><strong>Орк</strong></li>
-    <li><strong>Тролль</strong></li>
-    <li><strong>Таурен</strong></li>
-    <li><strong>Нежить</strong></li>
-  </ul>
+
+<main class="container">
+  <section class="mb-5">
+    <h2 class="text-primary">Альянс</h2>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="col reveal">
+        <div class="card h-100">
+          <div class="card-body d-flex">
+            <img src="logos/races/human-male.png" alt="Человек" class="me-3" style="width: 64px;">
+            <div>
+              <h5 class="card-title">Человек</h5>
+              <p class="card-text">Универсальная раса с бонусом к духу и навыкам мечей. Отличный выбор для паладинов и воинов.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col reveal">
+        <div class="card h-100">
+          <div class="card-body d-flex">
+            <img src="logos/races/nightelf-male.png" alt="Ночной эльф" class="me-3" style="width: 64px;">
+            <div>
+              <h5 class="card-title">Ночной эльф</h5>
+              <p class="card-text">Обладают способностью к невидимости и высокой ловкостью. Идеальны для друидов и охотников.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col reveal">
+        <div class="card h-100">
+          <div class="card-body d-flex">
+            <img src="logos/races/gnome-male.png" alt="Гном" class="me-3" style="width: 64px;">
+            <div>
+              <h5 class="card-title">Гном</h5>
+              <p class="card-text">Маленькие, но умные. Имеют бонус к инженерии и сопротивлению магии. Прекрасно подходят для магов и чернокнижников.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col reveal">
+        <div class="card h-100">
+          <div class="card-body d-flex">
+            <img src="logos/races/dwarf-male.png" alt="Дворф" class="me-3" style="width: 64px;">
+            <div>
+              <h5 class="card-title">Дворф</h5>
+              <p class="card-text">Выносливы и стойки. Имеют способность "Каменная форма" и бонус к стрельбе. Часто выбираются паладинами и воинами.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-5">
+    <h2 class="text-danger">Орда</h2>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="col reveal">
+        <div class="card h-100">
+          <div class="card-body d-flex">
+            <img src="logos/races/orc-male.png" alt="Орк" class="me-3" style="width: 64px;">
+            <div>
+              <h5 class="card-title">Орк</h5>
+              <p class="card-text">Сильны физически и получают бонус к ярости. Подходят для воинов, охотников и чернокнижников.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col reveal">
+        <div class="card h-100">
+          <div class="card-body d-flex">
+            <img src="logos/races/troll-male.png" alt="Тролль" class="me-3" style="width: 64px;">
+            <div>
+              <h5 class="card-title">Тролль</h5>
+              <p class="card-text">Имеют регенерацию здоровья и бонусы к лукам. Часто используются шаманами и охотниками.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col reveal">
+        <div class="card h-100">
+          <div class="card-body d-flex">
+            <img src="logos/races/tauren-male.png" alt="Таурен" class="me-3" style="width: 64px;">
+            <div>
+              <h5 class="card-title">Таурен</h5>
+              <p class="card-text">Обладают высоким здоровьем и способностью "Топот". Отлично подходят для танков и друидов.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col reveal">
+        <div class="card h-100">
+          <div class="card-body d-flex">
+            <img src="logos/races/undead-male.png" alt="Нежить" class="me-3" style="width: 64px;">
+            <div>
+              <h5 class="card-title">Нежить</h5>
+              <p class="card-text">Имеют иммунитет к страху и могут восстанавливать здоровье. Часто выбираются магами и жрецами.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Theme Switch
+  function toggleTheme() {
+    const root = document.documentElement;
+    const currentTheme = root.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+    root.classList.add('theme-transition');
+    root.setAttribute('data-theme', newTheme);
+
+    const btn = document.querySelector('.theme-toggle');
+    btn.textContent = newTheme === 'dark' ? 'Светлая тема' : 'Тёмная тема';
+
+    localStorage.setItem('theme', newTheme);
+
+    setTimeout(() => root.classList.remove('theme-transition'), 500);
+  }
+
+  // Theme Save
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    const btn = document.querySelector('.theme-toggle');
+    if (btn) {
+      btn.textContent = savedTheme === 'dark' ? 'Светлая тема' : 'Тёмная тема';
+    }
+
+    // Scroll Reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    revealElements.forEach(el => observer.observe(el));
+  });
+
+  // Scroll to top
+  const scrollBtn = document.createElement('button');
+  scrollBtn.textContent = '⬆';
+  scrollBtn.setAttribute('aria-label', 'Наверх');
+  scrollBtn.classList.add('scroll-to-top');
+  document.body.appendChild(scrollBtn);
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      scrollBtn.classList.add('visible');
+    } else {
+      scrollBtn.classList.remove('visible');
+    }
+  });
+
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
 </body>
 </html>

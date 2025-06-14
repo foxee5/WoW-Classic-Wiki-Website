@@ -2,28 +2,138 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>World of Warcraft Classic Wiki</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>World of Warcraft Wiki</title>
+    <link rel="icon" href="logos/icon.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-    <img src="logos/logo.webp" alt="WoW Logo" class="logo">
-    <h1>World of Warcraft Classic Wiki</h1>
-    <nav>
-        <ul>
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="classes.html">Классы</a></li>
-            <li><a href="races.html">Расы</a></li>
-            <li><a href="expansion.html">Дополнение</a></li>
-        </ul>
-    </nav>
+<header class="text-white py-3">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a href="index.html" class="d-flex align-items-center text-decoration-none logo-link">
+            <img src="logos/icon.png" alt="WoW Icon" class="logo">
+            <p class="site-title mb-0">WoW Classic Wiki</p>
+        </a>
+        <nav>
+            <ul class="nav">
+                <li class="nav-item"><a class="nav-link" href="index.html">Главная</a></li>
+                <li class="nav-item"><a class="nav-link" href="classes.html">Классы</a></li>
+                <li class="nav-item"><a class="nav-link" href="races.html">Расы</a></li>
+                <li class="nav-item"><a class="nav-link" href="expansion.html">Дополнение</a></li>
+            </ul>
+        </nav>
+        <button class="theme-toggle" onclick="toggleTheme()">Сменить тему</button>
+    </div>
 </header>
-<main>
-    <h2>Добро пожаловать в вики по World of Warcraft Classic (версия 1.12)</h2>
-    <p>Здесь вы найдете информацию о классах, расах и последнем контенте оригинальной версии игры.</p>
+
+<section class="hero">
+    <div class="container">
+        <img src="logos/logo.webp" alt="WoW Logo" class="img-fluid mb-4" style="max-width: 250px;">
+        <h1>Добро пожаловать в мир Warcraft</h1>
+        <p>Здесь вы найдете информацию о классах, расах и дополнениях классической версии World of Warcraft 1.12 (2004).</p>
+    </div>
+</section>
+
+<main class="container my-5">
+    <div class="row g-4">
+        <div class="col-md-4 reveal">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Классы</h5>
+                    <p class="card-text">Узнайте обо всех доступных классах в WoW Classic и выберите своего героя.</p>
+                    <a href="classes.html" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 reveal">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Расы</h5>
+                    <p class="card-text">Познакомьтесь с расами Альянса и Орды, их способностями и особенностями.</p>
+                    <a href="races.html" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 reveal">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Дополнение</h5>
+                    <p class="card-text">Узнайте об актуальном контенте версии 1.12 — самом завершённом этапе WoW Classic.</p>
+                    <a href="expansion.html" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
-<footer>
-    <p>&copy; 2025 World of Warcraft Classic Wiki (fan-made by tokyiskayashiza)</p>
+
+<footer class="bg-dark text-white text-center py-3">
+    <p class="mb-0">World of Warcraft &copy; Blizzard Entertainment | fan-made by tokyiskayashiza</p>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Theme Switch
+    function toggleTheme() {
+        const root = document.documentElement;
+        const currentTheme = root.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        root.classList.add('theme-transition');
+        root.setAttribute('data-theme', newTheme);
+
+        const btn = document.querySelector('.theme-toggle');
+        btn.textContent = newTheme === 'dark' ? 'Светлая тема' : 'Тёмная тема';
+
+        localStorage.setItem('theme', newTheme);
+
+        setTimeout(() => root.classList.remove('theme-transition'), 500);
+    }
+
+    // Theme Save
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        const btn = document.querySelector('.theme-toggle');
+        if (btn) {
+            btn.textContent = savedTheme === 'dark' ? 'Светлая тема' : 'Тёмная тема';
+        }
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        revealElements.forEach(el => observer.observe(el));
+    });
+
+    // Scroll to top
+    const scrollBtn = document.createElement('button');
+    scrollBtn.textContent = '⬆';
+    scrollBtn.setAttribute('aria-label', 'Наверх');
+    scrollBtn.classList.add('scroll-to-top');
+    document.body.appendChild(scrollBtn);
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollBtn.classList.add('visible');
+        } else {
+            scrollBtn.classList.remove('visible');
+        }
+    });
+
+    scrollBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
 </body>
 </html>
