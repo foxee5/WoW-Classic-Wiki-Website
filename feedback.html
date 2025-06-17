@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Отзывы | WoW Wiki</title>
+  <link rel="icon" href="logos/icon.png" type="image/png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="text-white py-3">
+  <div class="container d-flex justify-content-between align-items-center">
+    <a href="index.html" class="d-flex align-items-center text-decoration-none logo-link">
+      <img src="logos/icon.png" alt="WoW Icon" class="logo">
+      <p class="site-title mb-0">WoW Classic Wiki</p>
+    </a>
+    <nav>
+      <ul class="nav">
+        <li class="nav-item"><a class="nav-link" href="index.html">Главная</a></li>
+        <li class="nav-item"><a class="nav-link" href="classes.html">Классы</a></li>
+        <li class="nav-item"><a class="nav-link" href="races.html">Расы</a></li>
+        <li class="nav-item"><a class="nav-link" href="expansion.html">Дополнение</a></li>
+        <li class="nav-item"><a class="nav-link" href="feedback.html">Отзывы</a></li>
+      </ul>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()">Сменить тему</button>
+  </div>
+</header>
+
+<main class="container my-5">
+  <h1 class="text-center mb-4">Оставьте отзыв</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form id="feedbackForm">
+        <div class="mb-3">
+          <label for="name" class="form-label fw-bold">Имя:</label>
+          <input type="text" id="name" name="name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label fw-bold">Сообщение:</label>
+          <textarea id="message" name="message" class="form-control" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Отправить</button>
+      </form>
+      <p id="feedbackResponse" class="text-center mt-3"></p>
+    </div>
+  </div>
+</main>
+
+<footer class="bg-dark text-white text-center py-3">
+  <p class="mb-0">World of Warcraft &copy; Blizzard Entertainment | fan-made by tokyiskayashiza</p>
+</footer>
+
+<script>
+  function toggleTheme() {
+    const root = document.documentElement;
+    const currentTheme = root.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    root.classList.add('theme-transition');
+    root.setAttribute('data-theme', newTheme);
+    const btn = document.querySelector('.theme-toggle');
+    btn.textContent = newTheme === 'dark' ? 'Светлая тема' : 'Тёмная тема';
+    localStorage.setItem('theme', newTheme);
+    setTimeout(() => root.classList.remove('theme-transition'), 500);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    const btn = document.querySelector('.theme-toggle');
+    if (btn) btn.textContent = savedTheme === 'dark' ? 'Светлая тема' : 'Тёмная тема';
+
+    document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const message = document.getElementById('message').value;
+      const responseText = document.getElementById('feedbackResponse');
+      responseText.textContent = '';
+
+      try {
+        const response = await fetch('http://158.160.145.245:8029/feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, message })
+        });
+        if (!response.ok) throw new Error('Ошибка при отправке');
+        responseText.textContent = 'Спасибо за ваш отзыв!';
+        responseText.style.color = 'green';
+        document.getElementById('feedbackForm').reset();
+      } catch (error) {
+        responseText.textContent = 'Ошибка при отправке отзыва. Попробуйте позже.';
+        responseText.style.color = 'red';
+      }
+    });
+  });
+</script>
+</body>
+</html>
